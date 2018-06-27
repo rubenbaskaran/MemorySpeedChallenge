@@ -65,7 +65,7 @@ public class MainActivity extends Activity
         {
             super.onPreExecute();
             GameAlgorithm gameAlgorithm = new GameAlgorithm();
-            route = gameAlgorithm.GenerateRoute(10);
+            route = gameAlgorithm.GenerateRoute(8);
             startGameBtn.setEnabled(false);
             EnableGridButtons(false);
         }
