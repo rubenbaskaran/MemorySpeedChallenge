@@ -41,6 +41,7 @@ public class MainActivity extends Activity
         {
             route.remove(0);
             view.setBackground(getDrawable(R.drawable.grid_button_right_answer));
+            view.setEnabled(false);
             if (route.isEmpty())
             {
                 Toast.makeText(this, "Congratulations! Level completed!", Toast.LENGTH_LONG).show();

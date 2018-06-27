@@ -15,12 +15,12 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="0.8"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="3.2"
             android:orientation="vertical"
             android:weightSum="5">
 
@@ -282,8 +282,8 @@
                 android:id="@+id/startGameBtn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_weight="1"
                 android:onClick="onClick"
                 android:text="Start Game"/>
