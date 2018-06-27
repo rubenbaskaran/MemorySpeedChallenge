@@ -9,10 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class MainActivity extends Activity
 {
     View root;
-    int[] testRoute = {7, 9, 13, 17, 19};
+    ArrayList<Integer> route;
+    Button startGameBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -20,6 +23,7 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         root = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
         setContentView(root);
+        startGameBtn = findViewById(R.id.startGameBtn);
     }
 
     public void onClick(View view)
@@ -31,9 +35,18 @@ public class MainActivity extends Activity
     private class AsyncCreateRoute extends AsyncTask
     {
         @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            GameAlgorithm gameAlgorithm = new GameAlgorithm();
+            route = gameAlgorithm.GenerateRoute(10);
+            startGameBtn.setEnabled(false);
+        }
+
+        @Override
         protected Object doInBackground(Object[] objects)
         {
-            for (int item : testRoute)
+            for (int item : route)
             {
                 Object[] output = {true, item};
                 publishProgress(output);
@@ -64,8 +77,15 @@ public class MainActivity extends Activity
             }
             else
             {
-                btn.setBackgroundColor(Color.WHITE);
+                btn.setBackground(getDrawable(R.drawable.grid_button_background));
             }
+        }
+
+        @Override
+        protected void onPostExecute(Object o)
+        {
+            super.onPostExecute(o);
+            startGameBtn.setEnabled(true);
         }
     }
 }
