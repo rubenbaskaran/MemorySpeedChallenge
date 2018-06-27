@@ -36,6 +36,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="1"/>
 
                 <Button
@@ -43,6 +44,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="2"/>
 
                 <Button
@@ -50,6 +52,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="3"/>
 
                 <Button
@@ -57,6 +60,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="4"/>
 
                 <Button
@@ -64,6 +68,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="5"/>
             </LinearLayout>
 
@@ -79,6 +84,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="6"/>
 
                 <Button
@@ -86,6 +92,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="7"/>
 
                 <Button
@@ -93,6 +100,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="8"/>
 
                 <Button
@@ -100,6 +108,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="9"/>
 
                 <Button
@@ -107,6 +116,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="10"/>
             </LinearLayout>
 
@@ -122,6 +132,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="11"/>
 
                 <Button
@@ -129,6 +140,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="12"/>
 
                 <Button
@@ -136,6 +148,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="13"/>
 
                 <Button
@@ -143,6 +156,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="14"/>
 
                 <Button
@@ -150,6 +164,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="15"/>
             </LinearLayout>
 
@@ -165,6 +180,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="16"/>
 
                 <Button
@@ -172,6 +188,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="17"/>
 
                 <Button
@@ -179,6 +196,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="18"/>
 
                 <Button
@@ -186,6 +204,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="19"/>
 
                 <Button
@@ -193,6 +212,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="20"/>
             </LinearLayout>
 
@@ -208,6 +228,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="21"/>
 
                 <Button
@@ -215,6 +236,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="22"/>
 
                 <Button
@@ -222,6 +244,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="23"/>
 
                 <Button
@@ -229,6 +252,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="24"/>
 
                 <Button
@@ -236,6 +260,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
+                    android:onClick="onGridButtonClick"
                     android:tag="25"/>
             </LinearLayout>
         </LinearLayout>
