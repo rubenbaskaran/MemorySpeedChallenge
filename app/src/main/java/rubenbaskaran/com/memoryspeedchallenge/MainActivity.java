@@ -44,7 +44,7 @@ public class MainActivity extends Activity
             view.setEnabled(false);
             if (route.isEmpty())
             {
-                Toast.makeText(this, "Congratulations! Level completed!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Congratulations! Level completed!", Toast.LENGTH_SHORT).show();
                 EnableGridButtons(false);
                 startGameBtn.setEnabled(true);
             }
@@ -52,7 +52,7 @@ public class MainActivity extends Activity
         else
         {
             view.setBackground(getDrawable(R.drawable.grid_button_wrong_answer));
-            Toast.makeText(this, "Sorry! You failed!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Sorry! Level failed!", Toast.LENGTH_SHORT).show();
             EnableGridButtons(false);
             startGameBtn.setEnabled(true);
         }
@@ -79,7 +79,7 @@ public class MainActivity extends Activity
                 publishProgress(output);
                 try
                 {
-                    Thread.sleep(200);
+                    Thread.sleep(500);
                 }
                 catch (InterruptedException e)
                 {
