@@ -30,6 +30,7 @@ public class MainActivity extends Activity
 
     public void onClick(View view)
     {
+        ResetGridButtonsColor();
         AsyncCreateRoute asyncCreateRoute = new AsyncCreateRoute();
         asyncCreateRoute.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
@@ -39,7 +40,7 @@ public class MainActivity extends Activity
         if (Integer.parseInt(view.getTag().toString()) == route.get(0))
         {
             route.remove(0);
-            // TODO: Set color
+            view.setBackground(getDrawable(R.drawable.grid_button_right_answer));
             if (route.isEmpty())
             {
                 Toast.makeText(this, "Congratulations! Level completed!", Toast.LENGTH_LONG).show();
@@ -49,6 +50,7 @@ public class MainActivity extends Activity
         }
         else
         {
+            view.setBackground(getDrawable(R.drawable.grid_button_wrong_answer));
             Toast.makeText(this, "Sorry! You failed!", Toast.LENGTH_LONG).show();
             EnableGridButtons(false);
             startGameBtn.setEnabled(true);
@@ -140,5 +142,34 @@ public class MainActivity extends Activity
         root.findViewWithTag("23").setEnabled(input);
         root.findViewWithTag("24").setEnabled(input);
         root.findViewWithTag("25").setEnabled(input);
+    }
+
+    private void ResetGridButtonsColor()
+    {
+        root.findViewWithTag("1").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("2").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("3").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("4").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("5").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("6").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("7").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("8").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("9").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("10").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("11").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("12").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("13").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("14").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("15").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("16").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("17").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("18").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("19").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("20").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("21").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("22").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("23").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("24").setBackground(getDrawable(R.drawable.grid_button_background));
+        root.findViewWithTag("25").setBackground(getDrawable(R.drawable.grid_button_background));
     }
 }
