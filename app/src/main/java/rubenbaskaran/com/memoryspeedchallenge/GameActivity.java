@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity
+public class GameActivity extends Activity
 {
     View root;
     ArrayList<Integer> route;
@@ -22,7 +22,7 @@ public class MainActivity extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        root = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
+        root = LayoutInflater.from(this).inflate(R.layout.activity_game, null);
         setContentView(root);
         startGameBtn = findViewById(R.id.startGameBtn);
         EnableGridButtons(false);
