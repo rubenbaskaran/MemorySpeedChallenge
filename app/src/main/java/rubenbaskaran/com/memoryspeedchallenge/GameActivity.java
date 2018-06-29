@@ -26,6 +26,8 @@ public class GameActivity extends Activity
         setContentView(root);
         startGameBtn = findViewById(R.id.startGameBtn);
         EnableGridButtons(false);
+        // TODO: GetExtras
+        // TODO: Calculate difficulty based on level
     }
 
     public void onClick(View view)
