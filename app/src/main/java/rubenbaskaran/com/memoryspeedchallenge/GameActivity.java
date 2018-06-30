@@ -14,9 +14,14 @@ import java.util.ArrayList;
 
 public class GameActivity extends Activity
 {
+    //region Properties
     View root;
     ArrayList<Integer> route;
     Button startGameBtn;
+    int currentLevel, routeLength;
+    String currentRank;
+    long intervalTime;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,13 +31,14 @@ public class GameActivity extends Activity
         setContentView(root);
         startGameBtn = findViewById(R.id.startGameBtn);
         EnableGridButtons(false);
-        // TODO: GetExtras
-        // TODO: Calculate difficulty based on level
+
+        Bundle bundle = getIntent().getExtras();
+        currentLevel = bundle.getInt("currentLevel");
+        currentRank = bundle.getString("currentRank");
     }
 
-    public void onClick(View view)
+    public void onStartButtonClick(View view)
     {
-        ResetGridButtonsColor();
         AsyncCreateRoute asyncCreateRoute = new AsyncCreateRoute();
         asyncCreateRoute.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
@@ -66,10 +72,9 @@ public class GameActivity extends Activity
         protected void onPreExecute()
         {
             super.onPreExecute();
-            GameAlgorithm gameAlgorithm = new GameAlgorithm();
-            route = gameAlgorithm.GenerateRoute(10);
-            startGameBtn.setEnabled(false);
-            EnableGridButtons(false);
+            PrepareInterface();
+            SetDifficulty(currentLevel);
+            GenerateRoute(routeLength);
         }
 
         @Override
@@ -81,7 +86,7 @@ public class GameActivity extends Activity
                 publishProgress(output);
                 try
                 {
-                    Thread.sleep(500);
+                    Thread.sleep(intervalTime);
                 }
                 catch (InterruptedException e)
                 {
@@ -116,6 +121,26 @@ public class GameActivity extends Activity
             super.onPostExecute(o);
             EnableGridButtons(true);
         }
+    }
+
+    //region Helper Methods
+    private void SetDifficulty(int currentLevel)
+    {
+        routeLength = LevelingSystem.GetRouteLength(currentLevel);
+        intervalTime = LevelingSystem.GetIntervalTime(currentLevel);
+    }
+
+    private void GenerateRoute(int routeLength)
+    {
+        GameAlgorithm gameAlgorithm = new GameAlgorithm();
+        route = gameAlgorithm.GenerateRoute(routeLength);
+    }
+
+    private void PrepareInterface()
+    {
+        ResetGridButtonsColor();
+        startGameBtn.setEnabled(false);
+        EnableGridButtons(false);
     }
 
     private void EnableGridButtons(boolean input)
@@ -175,4 +200,5 @@ public class GameActivity extends Activity
         root.findViewWithTag("24").setBackground(getDrawable(R.drawable.grid_button_background));
         root.findViewWithTag("25").setBackground(getDrawable(R.drawable.grid_button_background));
     }
+    //endregion
 }

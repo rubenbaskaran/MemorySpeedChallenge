@@ -28,12 +28,14 @@
             android:weightSum="3">
 
             <TextView
+                android:id="@+id/currentRankTextView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="Rank: Beginner"/>
 
             <TextView
+                android:id="@+id/currentLevelTextView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
