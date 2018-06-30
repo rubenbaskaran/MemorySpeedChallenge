@@ -129,7 +129,7 @@ public class LevelingSystem
             case 26:
                 return 100;
             default:
-                return 100;
+                return 2000;
         }
     }
 }

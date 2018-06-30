@@ -22,7 +22,7 @@ public class GameActivity extends Activity
     View root;
     ArrayList<Integer> route;
     Button startGameBtn;
-    int currentLevel, routeLength;
+    int currentLevel, routeLength, startPosition;
     String currentRank;
     long intervalTime;
     //endregion
@@ -124,6 +124,8 @@ public class GameActivity extends Activity
         {
             super.onPostExecute(o);
             EnableGridButtons(true);
+            View _startPosition = root.findViewWithTag(String.valueOf(startPosition));
+            onGridButtonClick(_startPosition);
         }
     }
 
@@ -138,6 +140,7 @@ public class GameActivity extends Activity
     {
         GameAlgorithm gameAlgorithm = new GameAlgorithm();
         route = gameAlgorithm.GenerateRoute(routeLength);
+        startPosition = route.get(0);
     }
 
     private void PrepareInterface()
