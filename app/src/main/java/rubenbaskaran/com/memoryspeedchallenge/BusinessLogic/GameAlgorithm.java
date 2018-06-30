@@ -1,4 +1,4 @@
-package rubenbaskaran.com.memoryspeedchallenge;
+package rubenbaskaran.com.memoryspeedchallenge.BusinessLogic;
 
 import android.util.Log;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-class GameAlgorithm
+public class GameAlgorithm
 {
     //region Properties
     private HashMap<String, int[]> hashMap = new HashMap<>();
@@ -38,7 +38,7 @@ class GameAlgorithm
     //endregion
 
     //region Constructors
-    GameAlgorithm()
+    public GameAlgorithm()
     {
         hashMap.put("cell1", cell1);
         hashMap.put("cell2", cell2);
@@ -68,7 +68,7 @@ class GameAlgorithm
     }
     //endregion
 
-    ArrayList<Integer> GenerateRoute(int length)
+    public ArrayList<Integer> GenerateRoute(int length)
     {
         ArrayList<Integer> route = new ArrayList<>();
         Random randomGenerator = new Random();

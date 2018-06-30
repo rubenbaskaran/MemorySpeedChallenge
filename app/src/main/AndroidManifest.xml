@@ -11,12 +11,12 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".GameActivity"
+            android:name=".Activities.GameActivity"
             android:screenOrientation="portrait">
         </activity>
 
         <activity
-            android:name=".HomeActivity"
+            android:name=".Activities.HomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

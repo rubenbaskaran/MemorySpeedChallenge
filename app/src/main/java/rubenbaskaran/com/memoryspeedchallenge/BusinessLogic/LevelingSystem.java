@@ -1,11 +1,11 @@
-package rubenbaskaran.com.memoryspeedchallenge;
+package rubenbaskaran.com.memoryspeedchallenge.BusinessLogic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 public class LevelingSystem
 {
-    static int GetCurrentLevel(Context context)
+    public static int GetCurrentLevel(Context context)
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", context.MODE_PRIVATE);
         int currentLevel = sharedPreferences.getInt("currentlevel", 0);
@@ -18,7 +18,7 @@ public class LevelingSystem
         return currentLevel;
     }
 
-    static String GetCurrentRank(int currentLevel)
+    public static String GetCurrentRank(int currentLevel)
     {
         if (currentLevel >= 0 && currentLevel < 6)
         {
@@ -50,7 +50,7 @@ public class LevelingSystem
         }
     }
 
-    static int GetRouteLength(int currentLevel)
+    public static int GetRouteLength(int currentLevel)
     {
         if (currentLevel >= 0 && currentLevel < 6)
         {
@@ -78,7 +78,7 @@ public class LevelingSystem
         }
     }
 
-    static long GetIntervalTime(int currentLevel)
+    public static long GetIntervalTime(int currentLevel)
     {
         switch (currentLevel)
         {

@@ -1,4 +1,4 @@
-package rubenbaskaran.com.memoryspeedchallenge;
+package rubenbaskaran.com.memoryspeedchallenge.Activities;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import rubenbaskaran.com.memoryspeedchallenge.BusinessLogic.GameAlgorithm;
+import rubenbaskaran.com.memoryspeedchallenge.BusinessLogic.LevelingSystem;
+import rubenbaskaran.com.memoryspeedchallenge.R;
 
 public class GameActivity extends Activity
 {

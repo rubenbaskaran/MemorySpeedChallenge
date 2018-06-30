@@ -1,10 +1,13 @@
-package rubenbaskaran.com.memoryspeedchallenge;
+package rubenbaskaran.com.memoryspeedchallenge.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import rubenbaskaran.com.memoryspeedchallenge.BusinessLogic.LevelingSystem;
+import rubenbaskaran.com.memoryspeedchallenge.R;
 
 public class HomeActivity extends Activity
 {
