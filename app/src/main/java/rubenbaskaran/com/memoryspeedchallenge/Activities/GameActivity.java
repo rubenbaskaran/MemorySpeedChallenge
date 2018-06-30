@@ -1,6 +1,8 @@
 package rubenbaskaran.com.memoryspeedchallenge.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,8 +27,8 @@ public class GameActivity extends Activity
     int currentLevel, routeLength, startPosition, score;
     String currentRank;
     long intervalTime;
-    int minimumScore, counter;
-    TextView scoreTextView, counterTextView;
+    int counter;
+    TextView scoreTextView, counterTextView, levelTextView;
     Boolean GameIsActive = false;
     //endregion
 
@@ -43,6 +44,7 @@ public class GameActivity extends Activity
 
         scoreTextView = findViewById(R.id.scoreTextView);
         counterTextView = findViewById(R.id.counterTextView);
+        levelTextView = findViewById(R.id.levelTextView);
     }
     //endregion
 
@@ -54,15 +56,19 @@ public class GameActivity extends Activity
         }
         else
         {
-            Toast.makeText(this, "Game has ended", Toast.LENGTH_LONG).show();
-            if (score > LevelingSystem.GetMinimumScore(currentLevel))
+            if (score >= LevelingSystem.GetMinimumScore(currentLevel))
             {
-                // TODO: Increment currentLevel SharedPreference
-                // TODO: Open Dialog (Exit / Next level)
+                SharedPreferences sharedPreferences = getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", MODE_PRIVATE);
+                sharedPreferences.edit().putInt("currentlevel", currentLevel + 1).apply();
+
+                // TODO: Next/Exit
+                StartNewGame(null);
             }
             else
             {
-                // TODO: Open Dialog (Exit / Retry)
+                // TODO: Retry/Exit
+                Intent i = new Intent(this, HomeActivity.class);
+                startActivity(i);
             }
         }
     }
@@ -76,7 +82,6 @@ public class GameActivity extends Activity
             view.setEnabled(false);
             if (route.isEmpty())
             {
-                Toast.makeText(this, "Congratulations! Level completed!", Toast.LENGTH_SHORT).show();
                 EnableGridButtons(false);
                 startGameBtn.setEnabled(true);
                 score += 100;
@@ -86,7 +91,6 @@ public class GameActivity extends Activity
         }
         else
         {
-            Toast.makeText(this, "Sorry! Level failed!", Toast.LENGTH_SHORT).show();
             EnableGridButtons(false);
             startGameBtn.setEnabled(true);
             GoToNextLevel();
@@ -236,6 +240,7 @@ public class GameActivity extends Activity
     {
         currentLevel = LevelingSystem.GetCurrentLevel(this);
         currentRank = LevelingSystem.GetCurrentRank(currentLevel);
+        levelTextView.setText(String.valueOf(currentLevel));
     }
 
     private void GenerateRoute(int routeLength)
