@@ -54,27 +54,27 @@ public class LevelingSystem
     {
         if (currentLevel >= 0 && currentLevel < 6)
         {
-            return 5;
+            return 6;
         }
         else if (currentLevel > 5 && currentLevel < 11)
         {
-            return 7;
+            return 8;
         }
         else if (currentLevel > 10 && currentLevel < 16)
         {
-            return 9;
+            return 10;
         }
         else if (currentLevel > 15 && currentLevel < 21)
         {
-            return 11;
+            return 12;
         }
         else if (currentLevel > 20 && currentLevel < 25)
         {
-            return 13;
+            return 14;
         }
         else
         {
-            return 15;
+            return 16;
         }
     }
 

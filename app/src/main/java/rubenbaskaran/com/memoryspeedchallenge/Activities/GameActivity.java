@@ -59,6 +59,7 @@ public class GameActivity extends Activity
                 Toast.makeText(this, "Congratulations! Level completed!", Toast.LENGTH_SHORT).show();
                 EnableGridButtons(false);
                 startGameBtn.setEnabled(true);
+                // TODO: Increment currentLevel SharedPreference
             }
         }
         else
