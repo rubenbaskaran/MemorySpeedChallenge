@@ -35,8 +35,6 @@ public class HomeActivity extends Activity
     public void OpenGameActivity(View view)
     {
         Intent i = new Intent(this, GameActivity.class);
-        i.putExtra("currentLevel", currentLevel);
-        i.putExtra("currentRank", currentRank);
         startActivity(i);
     }
 }

@@ -43,20 +43,28 @@ public class GameActivity extends Activity
 
         scoreTextView = findViewById(R.id.scoreTextView);
         counterTextView = findViewById(R.id.counterTextView);
-
-        Bundle bundle = getIntent().getExtras();
-        currentLevel = bundle.getInt("currentLevel");
-        currentRank = bundle.getString("currentRank");
     }
     //endregion
 
-    public void StartNewGame(View view)
+    private void GoToNextLevel()
     {
-        score = 0;
-        GameIsActive = true;
-        scoreTextView.setText(String.valueOf(score));
-        StartCounter();
-        StartNewRound();
+        if (GameIsActive)
+        {
+            StartNewRound();
+        }
+        else
+        {
+            Toast.makeText(this, "Game has ended", Toast.LENGTH_LONG).show();
+            if (score > LevelingSystem.GetMinimumScore(currentLevel))
+            {
+                // TODO: Increment currentLevel SharedPreference
+                // TODO: Open Dialog (Exit / Next level)
+            }
+            else
+            {
+                // TODO: Open Dialog (Exit / Retry)
+            }
+        }
     }
 
     public void HandleUserInput(View view)
@@ -72,13 +80,12 @@ public class GameActivity extends Activity
                 EnableGridButtons(false);
                 startGameBtn.setEnabled(true);
                 score += 100;
-                scoreTextView.setText(String.valueOf(score));
+                scoreTextView.setText(String.valueOf(score) + "/" + LevelingSystem.GetMinimumScore(currentLevel));
                 GoToNextLevel();
             }
         }
         else
         {
-            view.setBackground(getDrawable(R.drawable.grid_button_wrong_answer));
             Toast.makeText(this, "Sorry! Level failed!", Toast.LENGTH_SHORT).show();
             EnableGridButtons(false);
             startGameBtn.setEnabled(true);
@@ -86,25 +93,12 @@ public class GameActivity extends Activity
         }
     }
 
-    private void GoToNextLevel()
+    public void StartNewGame(View view)
     {
-        if (GameIsActive)
-        {
-            StartNewRound();
-        }
-        else
-        {
-            Toast.makeText(this, "Game has ended", Toast.LENGTH_LONG).show();
-//            if (score > minimumScore)
-//            {
-//                // TODO: Increment currentLevel SharedPreference
-//                // TODO: Open ScoreboardActivity
-//            }
-//            else
-//            {
-//                // TODO: Open HomeActivity
-//            }
-        }
+        SetLevelAndRank();
+        SetScore();
+        StartCounter();
+        StartNewRound();
     }
 
     //region AsyncTasks
@@ -230,6 +224,18 @@ public class GameActivity extends Activity
     {
         routeLength = LevelingSystem.GetRouteLength(currentLevel);
         intervalTime = LevelingSystem.GetIntervalTime(currentLevel);
+    }
+
+    private void SetScore()
+    {
+        score = 0;
+        scoreTextView.setText(String.valueOf(score) + "/" + LevelingSystem.GetMinimumScore(currentLevel));
+    }
+
+    private void SetLevelAndRank()
+    {
+        currentLevel = LevelingSystem.GetCurrentLevel(this);
+        currentRank = LevelingSystem.GetCurrentRank(currentLevel);
     }
 
     private void GenerateRoute(int routeLength)
