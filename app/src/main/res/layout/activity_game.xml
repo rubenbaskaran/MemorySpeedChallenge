@@ -12,10 +12,24 @@
         android:orientation="vertical"
         android:weightSum="5">
 
-        <Space
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.8"/>
+            android:layout_weight="0.8"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/counterTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +50,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="1"/>
 
                 <Button
@@ -44,7 +58,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="2"/>
 
                 <Button
@@ -52,7 +66,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="3"/>
 
                 <Button
@@ -60,7 +74,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="4"/>
 
                 <Button
@@ -68,7 +82,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="5"/>
             </LinearLayout>
 
@@ -84,7 +98,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="6"/>
 
                 <Button
@@ -92,7 +106,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="7"/>
 
                 <Button
@@ -100,7 +114,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="8"/>
 
                 <Button
@@ -108,7 +122,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="9"/>
 
                 <Button
@@ -116,7 +130,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="10"/>
             </LinearLayout>
 
@@ -132,7 +146,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="11"/>
 
                 <Button
@@ -140,7 +154,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="12"/>
 
                 <Button
@@ -148,7 +162,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="13"/>
 
                 <Button
@@ -156,7 +170,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="14"/>
 
                 <Button
@@ -164,7 +178,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="15"/>
             </LinearLayout>
 
@@ -180,7 +194,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="16"/>
 
                 <Button
@@ -188,7 +202,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="17"/>
 
                 <Button
@@ -196,7 +210,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="18"/>
 
                 <Button
@@ -204,7 +218,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="19"/>
 
                 <Button
@@ -212,7 +226,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="20"/>
             </LinearLayout>
 
@@ -228,7 +242,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="21"/>
 
                 <Button
@@ -236,7 +250,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="22"/>
 
                 <Button
@@ -244,7 +258,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="23"/>
 
                 <Button
@@ -252,7 +266,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="24"/>
 
                 <Button
@@ -260,7 +274,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/grid_button_background"
-                    android:onClick="onGridButtonClick"
+                    android:onClick="HandleUserInput"
                     android:tag="25"/>
             </LinearLayout>
         </LinearLayout>
@@ -278,15 +292,27 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
 
-            <Button
-                android:id="@+id/startGameBtn"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="30dp"
                 android:layout_weight="1"
-                android:onClick="onStartButtonClick"
-                android:text="Start Game"/>
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/scoreTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/startGameBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:onClick="StartNewGame"
+                    android:text="Start Game"/>
+            </LinearLayout>
 
             <Space
                 android:layout_width="0dp"

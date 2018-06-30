@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,11 +23,15 @@ public class GameActivity extends Activity
     View root;
     ArrayList<Integer> route;
     Button startGameBtn;
-    int currentLevel, routeLength, startPosition;
+    int currentLevel, routeLength, startPosition, score;
     String currentRank;
     long intervalTime;
+    int minimumScore, counter;
+    TextView scoreTextView, counterTextView;
+    Boolean GameIsActive = false;
     //endregion
 
+    //region Constructors
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -36,18 +41,25 @@ public class GameActivity extends Activity
         startGameBtn = findViewById(R.id.startGameBtn);
         EnableGridButtons(false);
 
+        scoreTextView = findViewById(R.id.scoreTextView);
+        counterTextView = findViewById(R.id.counterTextView);
+
         Bundle bundle = getIntent().getExtras();
         currentLevel = bundle.getInt("currentLevel");
         currentRank = bundle.getString("currentRank");
     }
+    //endregion
 
-    public void onStartButtonClick(View view)
+    public void StartNewGame(View view)
     {
-        AsyncCreateRoute asyncCreateRoute = new AsyncCreateRoute();
-        asyncCreateRoute.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        score = 0;
+        GameIsActive = true;
+        scoreTextView.setText(String.valueOf(score));
+        StartCounter();
+        StartNewRound();
     }
 
-    public void onGridButtonClick(View view)
+    public void HandleUserInput(View view)
     {
         if (Integer.parseInt(view.getTag().toString()) == route.get(0))
         {
@@ -59,7 +71,9 @@ public class GameActivity extends Activity
                 Toast.makeText(this, "Congratulations! Level completed!", Toast.LENGTH_SHORT).show();
                 EnableGridButtons(false);
                 startGameBtn.setEnabled(true);
-                // TODO: Increment currentLevel SharedPreference
+                score += 100;
+                scoreTextView.setText(String.valueOf(score));
+                GoToNextLevel();
             }
         }
         else
@@ -68,6 +82,74 @@ public class GameActivity extends Activity
             Toast.makeText(this, "Sorry! Level failed!", Toast.LENGTH_SHORT).show();
             EnableGridButtons(false);
             startGameBtn.setEnabled(true);
+            GoToNextLevel();
+        }
+    }
+
+    private void GoToNextLevel()
+    {
+        if (GameIsActive)
+        {
+            StartNewRound();
+        }
+        else
+        {
+            Toast.makeText(this, "Game has ended", Toast.LENGTH_LONG).show();
+//            if (score > minimumScore)
+//            {
+//                // TODO: Increment currentLevel SharedPreference
+//                // TODO: Open ScoreboardActivity
+//            }
+//            else
+//            {
+//                // TODO: Open HomeActivity
+//            }
+        }
+    }
+
+    //region AsyncTasks
+    private class AsyncCounter extends AsyncTask
+    {
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            GameIsActive = true;
+            counter = 30;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects)
+        {
+            publishProgress();
+            while (counter > 0)
+            {
+                try
+                {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException e)
+                {
+                    Log.e("Error", "Error in AsyncCounter");
+                }
+                counter--;
+                publishProgress();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Object[] values)
+        {
+            super.onProgressUpdate(values);
+            counterTextView.setText(String.valueOf(counter));
+        }
+
+        @Override
+        protected void onPostExecute(Object o)
+        {
+            super.onPostExecute(o);
+            GameIsActive = false;
         }
     }
 
@@ -126,11 +208,24 @@ public class GameActivity extends Activity
             super.onPostExecute(o);
             EnableGridButtons(true);
             View _startPosition = root.findViewWithTag(String.valueOf(startPosition));
-            onGridButtonClick(_startPosition);
+            HandleUserInput(_startPosition);
         }
     }
+    //endregion
 
     //region Helper Methods
+    private void StartCounter()
+    {
+        AsyncCounter asyncCounter = new AsyncCounter();
+        asyncCounter.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    private void StartNewRound()
+    {
+        AsyncCreateRoute asyncCreateRoute = new AsyncCreateRoute();
+        asyncCreateRoute.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
     private void SetDifficulty(int currentLevel)
     {
         routeLength = LevelingSystem.GetRouteLength(currentLevel);
