@@ -1,6 +1,8 @@
 package rubenbaskaran.com.memoryspeedchallenge.Activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -48,31 +50,6 @@ public class GameActivity extends Activity
     }
     //endregion
 
-    private void GoToNextLevel()
-    {
-        if (GameIsActive)
-        {
-            StartNewRound();
-        }
-        else
-        {
-            if (score >= LevelingSystem.GetMinimumScore(currentLevel))
-            {
-                SharedPreferences sharedPreferences = getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", MODE_PRIVATE);
-                sharedPreferences.edit().putInt("currentlevel", currentLevel + 1).apply();
-
-                // TODO: Next/Exit
-                StartNewGame(null);
-            }
-            else
-            {
-                // TODO: Retry/Exit
-                Intent i = new Intent(this, HomeActivity.class);
-                startActivity(i);
-            }
-        }
-    }
-
     public void HandleUserInput(View view)
     {
         if (Integer.parseInt(view.getTag().toString()) == route.get(0))
@@ -103,6 +80,52 @@ public class GameActivity extends Activity
         SetScore();
         StartCounter();
         StartNewRound();
+    }
+
+    private void GoToNextLevel()
+    {
+        if (GameIsActive)
+        {
+            StartNewRound();
+        }
+        else
+        {
+            if (score >= LevelingSystem.GetMinimumScore(currentLevel))
+            {
+                IncrementCurrentLevel();
+                ShowDialog("Congratulations! Level completed!", "Next level");
+            }
+            else
+            {
+                ShowDialog("Sorry! You didn't get enough point!", "Retry");
+            }
+        }
+    }
+
+    private void ShowDialog(String message, String buttonText)
+    {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton(buttonText, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        WaitOneSecond();
+                        StartNewGame(null);
+                    }
+                })
+                .setNegativeButton("Exit", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        WaitOneSecond();
+                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(i);
+                    }
+                })
+                .show();
     }
 
     //region AsyncTasks
@@ -212,6 +235,24 @@ public class GameActivity extends Activity
     //endregion
 
     //region Helper Methods
+    private void WaitOneSecond()
+    {
+        try
+        {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e)
+        {
+            Log.e("Error", "Error in WaitOneSecond()");
+        }
+    }
+
+    private void IncrementCurrentLevel()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", MODE_PRIVATE);
+        sharedPreferences.edit().putInt("currentlevel", currentLevel + 1).apply();
+    }
+
     private void StartCounter()
     {
         AsyncCounter asyncCounter = new AsyncCounter();
