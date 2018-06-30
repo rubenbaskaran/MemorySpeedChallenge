@@ -85,35 +85,30 @@ public class LevelingSystem
             case 0:
                 return 1000;
             case 1:
-                return 980;
-            case 2:
-                return 960;
-            case 3:
-                return 940;
-            case 4:
-                return 920;
-            case 5:
                 return 900;
-            case 6:
-                return 850;
-            case 7:
+            case 2:
                 return 800;
-            case 8:
-                return 750;
-            case 9:
+            case 3:
                 return 700;
+            case 4:
+                return 600;
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
             case 10:
-                return 650;
-            case 11:
-                return 575;
-            case 12:
                 return 500;
+            case 11:
+                return 450;
+            case 12:
+                return 400;
             case 13:
-                return 425;
-            case 14:
                 return 350;
+            case 14:
+                return 300;
             case 15:
-                return 275;
+                return 250;
             case 16:
             case 17:
             case 18:
