@@ -20,21 +20,31 @@ public class HomeActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        currentLevel = LevelingSystem.GetCurrentLevel(this);
-        int levelToDisplay = (currentLevel == 26) ? 25 : currentLevel;
-        currentRank = LevelingSystem.GetCurrentRank(currentLevel);
-
         currentLevelTextView = findViewById(R.id.currentLevelTextView);
-        currentLevelTextView.setText("Level: " + String.valueOf(levelToDisplay));
-
         currentRankTextView = findViewById(R.id.currentRankTextView);
-        currentRankTextView.setText("Rank: " + currentRank);
+        SetLevelAndRank();
     }
 
     public void OpenGameActivity(View view)
     {
         Intent i = new Intent(this, GameActivity.class);
         startActivity(i);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        SetLevelAndRank();
+    }
+
+    private void SetLevelAndRank()
+    {
+        currentLevel = LevelingSystem.GetCurrentLevel(this);
+        int levelToDisplay = (currentLevel == 26) ? 25 : currentLevel;
+        currentRank = LevelingSystem.GetCurrentRank(currentLevel);
+
+        currentLevelTextView.setText("Level: " + String.valueOf(levelToDisplay));
+        currentRankTextView.setText("Rank: " + currentRank);
     }
 }

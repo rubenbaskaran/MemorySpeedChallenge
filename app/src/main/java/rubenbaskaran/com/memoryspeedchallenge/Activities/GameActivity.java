@@ -136,14 +136,14 @@ public class GameActivity extends Activity
         {
             super.onPreExecute();
             GameIsActive = true;
-            counter = 30;
+            counter = 40;
         }
 
         @Override
         protected Object doInBackground(Object[] objects)
         {
             publishProgress();
-            while (counter > 0)
+            while (counter > 0 && GameIsActive)
             {
                 try
                 {
@@ -190,6 +190,11 @@ public class GameActivity extends Activity
         {
             for (int item : route)
             {
+                if (!GameIsActive)
+                {
+                    break;
+                }
+
                 Object[] output = {true, item};
                 publishProgress(output);
                 try
@@ -235,6 +240,13 @@ public class GameActivity extends Activity
     //endregion
 
     //region Helper Methods
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        GameIsActive = false;
+    }
+
     private void WaitOneSecond()
     {
         try
@@ -281,7 +293,8 @@ public class GameActivity extends Activity
     {
         currentLevel = LevelingSystem.GetCurrentLevel(this);
         currentRank = LevelingSystem.GetCurrentRank(currentLevel);
-        levelTextView.setText(String.valueOf(currentLevel));
+        int levelToDisplay = (currentLevel == 26) ? 25 : currentLevel;
+        levelTextView.setText(String.valueOf(levelToDisplay));
     }
 
     private void GenerateRoute(int routeLength)
