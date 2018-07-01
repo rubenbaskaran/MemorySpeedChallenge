@@ -29,7 +29,7 @@ public class GameActivity extends Activity
     int currentLevel, routeLength, startPosition, score;
     String currentRank;
     long intervalTime;
-    int counter;
+    int counter, gameLength = 40;
     TextView scoreTextView, counterTextView, levelTextView;
     Boolean GameIsActive = false;
     //endregion
@@ -46,7 +46,11 @@ public class GameActivity extends Activity
 
         scoreTextView = findViewById(R.id.scoreTextView);
         counterTextView = findViewById(R.id.counterTextView);
+        counterTextView.setText(String.valueOf(gameLength) + " sec");
         levelTextView = findViewById(R.id.levelTextView);
+
+        SetLevelAndRank();
+        SetScore();
     }
     //endregion
 
@@ -62,7 +66,7 @@ public class GameActivity extends Activity
                 EnableGridButtons(false);
                 startGameBtn.setEnabled(true);
                 score += 100;
-                scoreTextView.setText(String.valueOf(score) + "/" + LevelingSystem.GetMinimumScore(currentLevel));
+                scoreTextView.setText(String.valueOf(score) + "p (" + "min. " + LevelingSystem.GetMinimumScore(currentLevel) + "p)");
                 GoToNextLevel();
             }
         }
@@ -136,7 +140,7 @@ public class GameActivity extends Activity
         {
             super.onPreExecute();
             GameIsActive = true;
-            counter = 40;
+            counter = gameLength;
         }
 
         @Override
@@ -163,7 +167,7 @@ public class GameActivity extends Activity
         protected void onProgressUpdate(Object[] values)
         {
             super.onProgressUpdate(values);
-            counterTextView.setText(String.valueOf(counter));
+            counterTextView.setText(String.valueOf(counter) + " sec");
         }
 
         @Override
@@ -286,7 +290,7 @@ public class GameActivity extends Activity
     private void SetScore()
     {
         score = 0;
-        scoreTextView.setText(String.valueOf(score) + "/" + LevelingSystem.GetMinimumScore(currentLevel));
+        scoreTextView.setText(String.valueOf(score) + "p (" + "min. " + LevelingSystem.GetMinimumScore(currentLevel) + "p)");
     }
 
     private void SetLevelAndRank()
@@ -294,7 +298,7 @@ public class GameActivity extends Activity
         currentLevel = LevelingSystem.GetCurrentLevel(this);
         currentRank = LevelingSystem.GetCurrentRank(currentLevel);
         int levelToDisplay = (currentLevel == 26) ? 25 : currentLevel;
-        levelTextView.setText(String.valueOf(levelToDisplay));
+        levelTextView.setText("Level: " + String.valueOf(levelToDisplay));
     }
 
     private void GenerateRoute(int routeLength)
