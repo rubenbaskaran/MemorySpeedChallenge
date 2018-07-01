@@ -54,6 +54,7 @@ public class GameActivity extends Activity
     }
     //endregion
 
+    //region Game
     public void HandleUserInput(View view)
     {
         if (Integer.parseInt(view.getTag().toString()) == route.get(0))
@@ -68,7 +69,7 @@ public class GameActivity extends Activity
                 startGameBtn.setEnabled(true);
                 score += 100;
                 scoreTextView.setText(String.valueOf(score) + "p (" + "min. " + LevelingSystem.GetMinimumScore(currentLevel) + "p)");
-                GoToNextLevel();
+                StartNewRoundOrShowResults();
             }
         }
         else
@@ -76,20 +77,11 @@ public class GameActivity extends Activity
             ShowRightAnswerIcon(false);
             EnableGridButtons(false);
             startGameBtn.setEnabled(true);
-            GoToNextLevel();
+            StartNewRoundOrShowResults();
         }
     }
 
-    public void StartNewGame(View view)
-    {
-        StopAllThreads = false;
-        SetLevelAndRank();
-        SetScore();
-        StartCounter();
-        StartNewRound();
-    }
-
-    private void GoToNextLevel()
+    private void StartNewRoundOrShowResults()
     {
         if (!StopAllThreads)
         {
@@ -108,6 +100,7 @@ public class GameActivity extends Activity
             }
         }
     }
+    //endregion
 
     //region AsyncTasks
     private class AsyncShowRightAnswerIcon extends AsyncTask<String, String, Void>
@@ -187,9 +180,12 @@ public class GameActivity extends Activity
         protected void onPostExecute(Object o)
         {
             super.onPostExecute(o);
-            StopAllThreads = true;
-            ResetGridButtonsColor();
-            GoToNextLevel();
+            if (!StopAllThreads)
+            {
+                StopAllThreads = true;
+                ResetGridButtonsColor();
+                StartNewRoundOrShowResults();
+            }
         }
     }
 
@@ -258,9 +254,21 @@ public class GameActivity extends Activity
             }
         }
     }
+
+    private void WaitOneSecond()
+    {
+        try
+        {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e)
+        {
+            Log.e("Error", "Error in WaitOneSecond()");
+        }
+    }
     //endregion
 
-    //region Helper Methods
+    //region Userinterface
     private void ShowRightAnswerIcon(Boolean rightAnswer)
     {
         AsyncShowRightAnswerIcon asyncShowRightAnswerIcon = new AsyncShowRightAnswerIcon();
@@ -292,56 +300,6 @@ public class GameActivity extends Activity
                 .show();
     }
 
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-        StopAllThreads = true;
-    }
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        StopAllThreads = false;
-    }
-
-    private void WaitOneSecond()
-    {
-        try
-        {
-            Thread.sleep(1000);
-        }
-        catch (InterruptedException e)
-        {
-            Log.e("Error", "Error in WaitOneSecond()");
-        }
-    }
-
-    private void IncrementCurrentLevel()
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", MODE_PRIVATE);
-        sharedPreferences.edit().putInt("currentlevel", currentLevel + 1).apply();
-    }
-
-    private void StartCounter()
-    {
-        AsyncCounter asyncCounter = new AsyncCounter();
-        asyncCounter.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
-    private void StartNewRound()
-    {
-        AsyncCreateRoute asyncCreateRoute = new AsyncCreateRoute();
-        asyncCreateRoute.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
-    private void SetDifficulty(int currentLevel)
-    {
-        routeLength = LevelingSystem.GetRouteLength(currentLevel);
-        intervalTime = LevelingSystem.GetIntervalTime(currentLevel);
-    }
-
     private void SetScore()
     {
         score = 0;
@@ -354,20 +312,6 @@ public class GameActivity extends Activity
         currentRank = LevelingSystem.GetCurrentRank(currentLevel);
         int levelToDisplay = (currentLevel == 26) ? 25 : currentLevel;
         levelTextView.setText("Level: " + String.valueOf(levelToDisplay));
-    }
-
-    private void GenerateRoute(int routeLength)
-    {
-        GameAlgorithm gameAlgorithm = new GameAlgorithm();
-        route = gameAlgorithm.GenerateRoute(routeLength);
-        startPosition = route.get(0);
-    }
-
-    private void PrepareInterface()
-    {
-        ResetGridButtonsColor();
-        startGameBtn.setEnabled(false);
-        EnableGridButtons(false);
     }
 
     private void EnableGridButtons(boolean input)
@@ -433,6 +377,71 @@ public class GameActivity extends Activity
                 root.findViewWithTag("25").setBackground(getDrawable(R.drawable.grid_button_background));
             }
         });
+    }
+
+    private void PrepareInterface()
+    {
+        ResetGridButtonsColor();
+        startGameBtn.setEnabled(false);
+        EnableGridButtons(false);
+    }
+    //endregion
+
+    //region Helpers
+    public void StartNewGame(View view)
+    {
+        StopAllThreads = false;
+        SetLevelAndRank();
+        SetScore();
+        StartCounter();
+        StartNewRound();
+    }
+
+    private void IncrementCurrentLevel()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", MODE_PRIVATE);
+        sharedPreferences.edit().putInt("currentlevel", currentLevel + 1).apply();
+    }
+
+    private void StartCounter()
+    {
+        AsyncCounter asyncCounter = new AsyncCounter();
+        asyncCounter.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    private void StartNewRound()
+    {
+        AsyncCreateRoute asyncCreateRoute = new AsyncCreateRoute();
+        asyncCreateRoute.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    private void SetDifficulty(int currentLevel)
+    {
+        routeLength = LevelingSystem.GetRouteLength(currentLevel);
+        intervalTime = LevelingSystem.GetIntervalTime(currentLevel);
+    }
+
+    private void GenerateRoute(int routeLength)
+    {
+        GameAlgorithm gameAlgorithm = new GameAlgorithm();
+        route = gameAlgorithm.GenerateRoute(routeLength);
+        startPosition = route.get(0);
+    }
+    //endregion
+
+    //region Lifecycle
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        StopAllThreads = true;
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        StopAllThreads = false;
     }
     //endregion
 }
