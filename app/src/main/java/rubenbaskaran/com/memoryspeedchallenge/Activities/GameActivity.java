@@ -124,7 +124,6 @@ public class GameActivity extends Activity
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        WaitOneSecond();
                         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(i);
                     }

@@ -47,54 +47,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:weightSum="3">
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Play Game"
-            android:onClick="OpenGameActivity"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="OpenGameActivity"
+            android:text="Play Game"/>
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Online Challenge"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:text="Highscores"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
         <Button
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:text="Settings"/>
 
     </LinearLayout>
-
 </LinearLayout>
