@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class GameActivity extends Activity
     int counter, gameLength = 40;
     TextView scoreTextView, counterTextView, levelTextView;
     Boolean GameIsActive = false;
+    Boolean StopAllThreads = false;
     //endregion
 
     //region Constructors
@@ -63,6 +65,7 @@ public class GameActivity extends Activity
             view.setEnabled(false);
             if (route.isEmpty())
             {
+                ShowRightAnswerIcon(true);
                 EnableGridButtons(false);
                 startGameBtn.setEnabled(true);
                 score += 100;
@@ -72,6 +75,7 @@ public class GameActivity extends Activity
         }
         else
         {
+            ShowRightAnswerIcon(false);
             EnableGridButtons(false);
             startGameBtn.setEnabled(true);
             GoToNextLevel();
@@ -106,32 +110,43 @@ public class GameActivity extends Activity
         }
     }
 
-    private void ShowDialog(String message, String buttonText)
+    //region AsyncTasks
+    private class AsyncShowRightAnswerIcon extends AsyncTask<String, String, Void>
     {
-        new AlertDialog.Builder(this)
-                .setMessage(message)
-                .setPositiveButton(buttonText, new DialogInterface.OnClickListener()
+        @Override
+        protected Void doInBackground(String... strings)
+        {
+            if (strings[0].equals("true"))
+            {
+                onProgressUpdate(String.valueOf(R.drawable.correct_answer));
+                WaitOneSecond();
+                onProgressUpdate(String.valueOf(android.R.color.transparent));
+            }
+            else
+            {
+                onProgressUpdate(String.valueOf(R.drawable.wrong_answer));
+                WaitOneSecond();
+                onProgressUpdate(String.valueOf(android.R.color.transparent));
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(final String... values)
+        {
+            super.onProgressUpdate(values);
+            runOnUiThread(new Runnable()
+            {
+                @Override
+                public void run()
                 {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        WaitOneSecond();
-                        StartNewGame(null);
-                    }
-                })
-                .setNegativeButton("Exit", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                        startActivity(i);
-                    }
-                })
-                .show();
+                    ImageView resultImageView = findViewById(R.id.resultImageView);
+                    resultImageView.setImageResource(Integer.parseInt(values[0]));
+                }
+            });
+        }
     }
 
-    //region AsyncTasks
     private class AsyncCounter extends AsyncTask
     {
         @Override
@@ -146,7 +161,7 @@ public class GameActivity extends Activity
         protected Object doInBackground(Object[] objects)
         {
             publishProgress();
-            while (counter > 0 && GameIsActive)
+            while (counter > 0 && !StopAllThreads)
             {
                 try
                 {
@@ -193,11 +208,10 @@ public class GameActivity extends Activity
         {
             for (int item : route)
             {
-                if (!GameIsActive)
+                if (StopAllThreads)
                 {
                     break;
                 }
-
                 Object[] output = {true, item};
                 publishProgress(output);
                 try
@@ -243,11 +257,49 @@ public class GameActivity extends Activity
     //endregion
 
     //region Helper Methods
+    private void ShowRightAnswerIcon(Boolean rightAnswer)
+    {
+        AsyncShowRightAnswerIcon asyncShowRightAnswerIcon = new AsyncShowRightAnswerIcon();
+        asyncShowRightAnswerIcon.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, String.valueOf(rightAnswer));
+    }
+
+    private void ShowDialog(String message, String buttonText)
+    {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton(buttonText, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        WaitOneSecond();
+                        StartNewGame(null);
+                    }
+                })
+                .setNegativeButton("Exit", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(i);
+                    }
+                })
+                .show();
+    }
+
     @Override
     protected void onDestroy()
     {
         super.onDestroy();
-        GameIsActive = false;
+        StopAllThreads = true;
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        StopAllThreads = false;
     }
 
     private void WaitOneSecond()
