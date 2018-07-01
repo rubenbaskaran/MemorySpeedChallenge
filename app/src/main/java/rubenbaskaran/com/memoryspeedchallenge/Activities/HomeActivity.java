@@ -47,4 +47,10 @@ public class HomeActivity extends Activity
         currentLevelTextView.setText("Level: " + String.valueOf(levelToDisplay));
         currentRankTextView.setText("Rank: " + currentRank);
     }
+
+    public void OpenHighscoreActivity(View view)
+    {
+        Intent i = new Intent(this, HighscoreActivity.class);
+        startActivity(i);
+    }
 }
