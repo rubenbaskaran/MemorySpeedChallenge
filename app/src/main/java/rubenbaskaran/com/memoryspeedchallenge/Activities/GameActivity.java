@@ -75,7 +75,7 @@ public class GameActivity extends Activity
                 EnableGridButtons(false);
                 startGameBtn.setEnabled(true);
                 score += 100;
-                scoreTextView.setText(String.valueOf(score) + "p (" + "min. " + LevelingSystem.GetMinimumScore(currentLevel) + "p)");
+                scoreTextView.setText("Points: " + String.valueOf(score) + "/" + LevelingSystem.GetMinimumScore(currentLevel));
                 StartNewRoundOrShowResults();
             }
         }
@@ -311,7 +311,7 @@ public class GameActivity extends Activity
     private void SetScore()
     {
         score = 0;
-        scoreTextView.setText(String.valueOf(score) + "p (" + "min. " + LevelingSystem.GetMinimumScore(currentLevel) + "p)");
+        scoreTextView.setText("Points: " + String.valueOf(score) + "/" + LevelingSystem.GetMinimumScore(currentLevel));
     }
 
     private void SetLevelAndRank()
