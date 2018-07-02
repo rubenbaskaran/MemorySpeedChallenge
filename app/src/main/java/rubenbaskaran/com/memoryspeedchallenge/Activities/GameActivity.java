@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -118,12 +119,14 @@ public class GameActivity extends Activity
             if (strings[0].equals("true"))
             {
                 onProgressUpdate(String.valueOf(R.drawable.correct_answer));
+                PlaySound(R.raw.correct);
                 WaitOneSecond();
                 onProgressUpdate(String.valueOf(android.R.color.transparent));
             }
             else
             {
                 onProgressUpdate(String.valueOf(R.drawable.wrong_answer));
+                PlaySound(R.raw.wrong);
                 WaitOneSecond();
                 onProgressUpdate(String.valueOf(android.R.color.transparent));
             }
@@ -451,6 +454,21 @@ public class GameActivity extends Activity
     {
         super.onResume();
         StopAllThreads = false;
+    }
+    //endregion
+
+    //region Sounds
+    private void PlaySound(int soundFileId)
+    {
+        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), soundFileId);
+        mp.start();
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+        {
+            public void onCompletion(MediaPlayer mp)
+            {
+                mp.release();
+            }
+        });
     }
     //endregion
 }
