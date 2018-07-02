@@ -27,7 +27,7 @@ public class GameActivity extends Activity
     View root;
     ArrayList<Integer> route;
     Button startGameBtn;
-    int currentLevel, routeLength, startPosition, score, counter, gameLength = 30;
+    int currentLevel, routeLength, generatedRouteLength, startPosition, score, counter, gameLength = 30;
     String currentRank;
     long intervalTime;
     TextView scoreTextView, counterTextView, levelTextView;
@@ -74,7 +74,7 @@ public class GameActivity extends Activity
                 ShowRightAnswerIcon(true);
                 EnableGridButtons(false);
                 startGameBtn.setEnabled(true);
-                score += 100;
+                score += 10 * generatedRouteLength;
                 scoreTextView.setText("Points: " + String.valueOf(score) + "/" + LevelingSystem.GetMinimumScore(currentLevel));
                 StartNewRoundOrShowResults();
             }
@@ -433,6 +433,7 @@ public class GameActivity extends Activity
     {
         GameAlgorithm gameAlgorithm = new GameAlgorithm();
         route = gameAlgorithm.GenerateRoute(routeLength);
+        generatedRouteLength = route.size() - 1;
         startPosition = route.get(0);
     }
     //endregion
