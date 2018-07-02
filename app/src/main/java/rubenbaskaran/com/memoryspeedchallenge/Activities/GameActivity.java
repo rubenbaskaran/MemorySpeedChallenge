@@ -60,7 +60,14 @@ public class GameActivity extends Activity
         if (Integer.parseInt(view.getTag().toString()) == route.get(0))
         {
             route.remove(0);
-            view.setBackground(getDrawable(R.drawable.grid_button_right_answer));
+            if (Integer.parseInt(view.getTag().toString()) == startPosition)
+            {
+                view.setBackground(getDrawable(R.drawable.start_position));
+            }
+            else
+            {
+                view.setBackground(getDrawable(R.drawable.grid_button_right_answer));
+            }
             view.setEnabled(false);
             if (route.isEmpty())
             {
