@@ -53,4 +53,10 @@ public class HomeActivity extends Activity
         Intent i = new Intent(this, HighscoreActivity.class);
         startActivity(i);
     }
+
+    public void OpenSettingsActivity(View view)
+    {
+        Intent i = new Intent(this, SettingsActivity.class);
+        startActivity(i);
+    }
 }

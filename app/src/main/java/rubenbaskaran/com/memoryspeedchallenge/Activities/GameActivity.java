@@ -460,15 +460,21 @@ public class GameActivity extends Activity
     //region Sounds
     private void PlaySound(int soundFileId)
     {
-        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), soundFileId);
-        mp.start();
-        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+        SharedPreferences sharedPreferences = getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", MODE_PRIVATE);
+        Boolean soundOn = sharedPreferences.getBoolean("sound", true);
+
+        if(soundOn)
         {
-            public void onCompletion(MediaPlayer mp)
+            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), soundFileId);
+            mp.start();
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
             {
-                mp.release();
-            }
-        });
+                public void onCompletion(MediaPlayer mp)
+                {
+                    mp.release();
+                }
+            });
+        }
     }
     //endregion
 }
