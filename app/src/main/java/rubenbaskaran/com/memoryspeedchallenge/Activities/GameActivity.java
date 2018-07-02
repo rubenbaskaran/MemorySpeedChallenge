@@ -312,7 +312,7 @@ public class GameActivity extends Activity
         currentLevel = LevelingSystem.GetCurrentLevel(this);
         currentRank = LevelingSystem.GetCurrentRank(currentLevel);
         int levelToDisplay = (currentLevel == 26) ? 25 : currentLevel;
-        levelTextView.setText("Level: " + String.valueOf(levelToDisplay));
+        levelTextView.setText("Level: " + String.valueOf(levelToDisplay) + "/25");
     }
 
     private void EnableGridButtons(boolean input)

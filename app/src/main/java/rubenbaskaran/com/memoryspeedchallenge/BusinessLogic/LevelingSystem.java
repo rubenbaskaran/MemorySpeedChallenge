@@ -58,23 +58,23 @@ public class LevelingSystem
         }
         else if (currentLevel > 5 && currentLevel < 11)
         {
-            return 8;
+            return 7;
         }
         else if (currentLevel > 10 && currentLevel < 16)
         {
-            return 10;
+            return 8;
         }
         else if (currentLevel > 15 && currentLevel < 21)
         {
-            return 12;
+            return 9;
         }
         else if (currentLevel > 20 && currentLevel < 25)
         {
-            return 14;
+            return 10;
         }
         else
         {
-            return 16;
+            return 11;
         }
     }
 
@@ -83,15 +83,10 @@ public class LevelingSystem
         switch (currentLevel)
         {
             case 0:
-                return 1000;
             case 1:
-                return 900;
             case 2:
-                return 800;
             case 3:
-                return 700;
             case 4:
-                return 600;
             case 5:
             case 6:
             case 7:
@@ -130,51 +125,53 @@ public class LevelingSystem
 
     public static int GetMinimumScore(int currentLevel)
     {
-        switch (currentLevel)
-        {
-            case 0:
-                return 100;
-            case 1:
-                return 200;
-            case 2:
-                return 300;
-            case 3:
-                return 400;
-            case 4:
-                return 500;
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-                return 600;
-            case 11:
-                return 700;
-            case 12:
-                return 800;
-            case 13:
-                return 900;
-            case 14:
-                return 1000;
-            case 15:
-                return 1100;
-            case 16:
-            case 17:
-            case 18:
-            case 19:
-            case 20:
-                return 1500;
-            case 21:
-            case 22:
-            case 23:
-            case 24:
-                return 2000;
-            case 25:
-            case 26:
-                return 2500;
-            default:
-                return 1;
-        }
+        return 500;
+
+//        switch (currentLevel)
+//        {
+//            case 0:
+//                return 100;
+//            case 1:
+//                return 200;
+//            case 2:
+//                return 300;
+//            case 3:
+//                return 400;
+//            case 4:
+//                return 500;
+//            case 5:
+//            case 6:
+//            case 7:
+//            case 8:
+//            case 9:
+//            case 10:
+//                return 600;
+//            case 11:
+//                return 700;
+//            case 12:
+//                return 800;
+//            case 13:
+//                return 900;
+//            case 14:
+//                return 1000;
+//            case 15:
+//                return 1100;
+//            case 16:
+//            case 17:
+//            case 18:
+//            case 19:
+//            case 20:
+//                return 1500;
+//            case 21:
+//            case 22:
+//            case 23:
+//            case 24:
+//                return 2000;
+//            case 25:
+//            case 26:
+//                return 500;
+//            default:
+//                return 1;
+//        }
     }
 }
