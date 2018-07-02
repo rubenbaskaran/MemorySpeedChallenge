@@ -61,11 +61,7 @@ public class GameActivity extends Activity
         if (Integer.parseInt(view.getTag().toString()) == route.get(0))
         {
             route.remove(0);
-            if (Integer.parseInt(view.getTag().toString()) == startPosition)
-            {
-                view.setBackground(getDrawable(R.drawable.start_position));
-            }
-            else
+            if (!(Integer.parseInt(view.getTag().toString()) == startPosition))
             {
                 view.setBackground(getDrawable(R.drawable.grid_button_right_answer));
             }
@@ -229,8 +225,11 @@ public class GameActivity extends Activity
                 {
                     Log.e("Error", "Error in AsyncCreateRoute");
                 }
-                output[0] = false;
-                publishProgress(output);
+                if (item != startPosition)
+                {
+                    output[0] = false;
+                    publishProgress(output);
+                }
             }
 
             return null;
@@ -241,8 +240,11 @@ public class GameActivity extends Activity
         {
             super.onProgressUpdate(values);
             Button btn = root.findViewWithTag(String.valueOf(values[1]));
-
-            if (((boolean) values[0]))
+            if ((int)values[1] == startPosition)
+            {
+                btn.setBackground(getDrawable(R.drawable.start_position));
+            }
+            else if (((boolean) values[0]))
             {
                 btn.setBackgroundColor(Color.BLACK);
             }
@@ -463,7 +465,7 @@ public class GameActivity extends Activity
         SharedPreferences sharedPreferences = getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", MODE_PRIVATE);
         Boolean soundOn = sharedPreferences.getBoolean("sound", true);
 
-        if(soundOn)
+        if (soundOn)
         {
             MediaPlayer mp = MediaPlayer.create(getApplicationContext(), soundFileId);
             mp.start();
