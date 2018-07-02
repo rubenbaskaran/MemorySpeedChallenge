@@ -27,7 +27,7 @@ public class GameActivity extends Activity
     View root;
     ArrayList<Integer> route;
     Button startGameBtn;
-    int currentLevel, routeLength, startPosition, score, counter, gameLength = 40;
+    int currentLevel, routeLength, startPosition, score, counter, gameLength = 30;
     String currentRank;
     long intervalTime;
     TextView scoreTextView, counterTextView, levelTextView;
@@ -279,6 +279,7 @@ public class GameActivity extends Activity
     {
         new AlertDialog.Builder(this)
                 .setMessage(message)
+                .setCancelable(false)
                 .setPositiveButton(buttonText, new DialogInterface.OnClickListener()
                 {
                     @Override
