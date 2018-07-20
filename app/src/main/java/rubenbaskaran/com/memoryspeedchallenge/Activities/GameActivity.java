@@ -243,14 +243,18 @@ public class GameActivity extends Activity
         protected void onProgressUpdate(Object[] values)
         {
             super.onProgressUpdate(values);
-            Button btn = root.findViewWithTag(String.valueOf(values[1]));
-            if ((int) values[1] == startPosition)
+            boolean showDirectionImage = (boolean) values[0];
+            int currentPosition = (int) values[1];
+            int directionImageId = (int) values[2];
+
+            Button btn = root.findViewWithTag(String.valueOf(currentPosition));
+            if (currentPosition == startPosition)
             {
                 btn.setBackground(getDrawable(R.drawable.start_position));
             }
-            else if (((boolean) values[0]))
+            else if (showDirectionImage)
             {
-                btn.setBackground(getDrawable((int) values[2]));
+                btn.setBackground(getDrawable(directionImageId));
             }
             else
             {
