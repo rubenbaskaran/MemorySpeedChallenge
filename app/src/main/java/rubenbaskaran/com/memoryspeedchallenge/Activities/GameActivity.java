@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -209,13 +208,16 @@ public class GameActivity extends Activity
         @Override
         protected Object doInBackground(Object[] objects)
         {
+            int currentPosition = 0;
+
             for (int item : route)
             {
                 if (StopAllThreads)
                 {
                     break;
                 }
-                Object[] output = {true, item};
+                int direction = GetDirection(item, currentPosition);
+                Object[] output = {true, item, direction};
                 publishProgress(output);
                 try
                 {
@@ -230,6 +232,8 @@ public class GameActivity extends Activity
                     output[0] = false;
                     publishProgress(output);
                 }
+
+                currentPosition = item;
             }
 
             return null;
@@ -240,13 +244,13 @@ public class GameActivity extends Activity
         {
             super.onProgressUpdate(values);
             Button btn = root.findViewWithTag(String.valueOf(values[1]));
-            if ((int)values[1] == startPosition)
+            if ((int) values[1] == startPosition)
             {
                 btn.setBackground(getDrawable(R.drawable.start_position));
             }
             else if (((boolean) values[0]))
             {
-                btn.setBackgroundColor(Color.BLACK);
+                btn.setBackground(getDrawable((int) values[2]));
             }
             else
             {
@@ -401,6 +405,30 @@ public class GameActivity extends Activity
     //endregion
 
     //region Helpers
+    private int GetDirection(int newPosition, int previousPosition)
+    {
+        String direction;
+
+        if (newPosition == previousPosition - 1)
+        {
+            direction = "left";
+        }
+        else if (newPosition == previousPosition + 1)
+        {
+            direction = "right";
+        }
+        else if (newPosition < previousPosition)
+        {
+            direction = "up";
+        }
+        else
+        {
+            direction = "down";
+        }
+
+        return getApplicationContext().getResources().getIdentifier(direction, "drawable", getApplicationContext().getPackageName());
+    }
+
     public void StartNewGame(View view)
     {
         StopAllThreads = false;
