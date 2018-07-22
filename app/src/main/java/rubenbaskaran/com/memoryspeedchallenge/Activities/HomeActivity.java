@@ -42,8 +42,21 @@ public class HomeActivity extends Activity
     {
         currentLevel = LevelingSystem.GetCurrentLevel(this);
         currentRank = LevelingSystem.GetCurrentRank(currentLevel);
+        String outputMessage;
 
-        String outputMessage = currentLevel == 11 ? "Level: 10/10 [Game completed - Unlocked competition level]" : "Level: " + String.valueOf(currentLevel) + "/10";
+        if (currentLevel == 11)
+        {
+            outputMessage = "Level: Bonus Level";
+        }
+        else if (currentLevel == 10)
+        {
+            outputMessage = "Level: 10/10 [Complete level 10 to unlock bonus level]";
+        }
+        else
+        {
+            outputMessage = "Level: " + String.valueOf(currentLevel) + "/10";
+        }
+
         currentLevelTextView.setText(outputMessage);
         currentRankTextView.setText("Rank: " + currentRank);
     }
