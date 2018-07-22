@@ -332,7 +332,8 @@ public class GameActivity extends Activity
     private void SetScore()
     {
         score = 0;
-        scoreTextView.setText("Points: " + String.valueOf(score) + "/" + LevelingSystem.GetMinimumScore(currentLevel));
+        String outputMessage = currentLevel == 11 ? "Points: " + String.valueOf(score) : "Points: " + String.valueOf(score) + "/" + LevelingSystem.GetMinimumScore(currentLevel);
+        scoreTextView.setText(outputMessage);
     }
 
     private void SetLevelAndRank()

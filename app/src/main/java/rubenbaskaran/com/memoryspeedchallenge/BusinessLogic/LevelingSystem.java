@@ -94,8 +94,9 @@ public class LevelingSystem
                 return 150;
             case 9:
             case 10:
-            case 11:
                 return 100;
+            case 11:
+                return 200;
             default:
                 return 500;
         }
