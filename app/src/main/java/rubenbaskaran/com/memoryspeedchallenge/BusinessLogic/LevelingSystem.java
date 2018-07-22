@@ -8,9 +8,9 @@ public class LevelingSystem
     public static int GetCurrentLevel(Context context)
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", context.MODE_PRIVATE);
-        int currentLevel = sharedPreferences.getInt("currentlevel", 0);
+        int currentLevel = sharedPreferences.getInt("currentlevel", 1);
 
-        if (currentLevel == 0)
+        if (currentLevel == 1)
         {
             sharedPreferences.edit().putInt("currentLevel", currentLevel).apply();
         }
@@ -20,7 +20,7 @@ public class LevelingSystem
 
     public static String GetCurrentRank(int currentLevel)
     {
-        if (currentLevel >= 0 && currentLevel < 6)
+        if (currentLevel > 0 && currentLevel < 6)
         {
             return "Beginner";
         }
@@ -34,15 +34,7 @@ public class LevelingSystem
         }
         else if (currentLevel > 15 && currentLevel < 21)
         {
-            return "Master";
-        }
-        else if (currentLevel > 20 && currentLevel <= 25)
-        {
             return "Genius";
-        }
-        else if (currentLevel == 26)
-        {
-            return "God";
         }
         else
         {
@@ -54,60 +46,46 @@ public class LevelingSystem
     {
         switch (currentLevel)
         {
-            case 0:
-                return 4;
             case 1:
                 return 4;
             case 2:
-                return 5;
+                return 4;
             case 3:
                 return 5;
             case 4:
-                return 6;
+                return 5;
             case 5:
                 return 6;
             case 6:
-                return 7;
+                return 6;
             case 7:
                 return 7;
             case 8:
-                return 8;
+                return 7;
             case 9:
                 return 8;
             case 10:
-                return 9;
+                return 8;
             case 11:
                 return 9;
             case 12:
-                return 10;
+                return 9;
             case 13:
                 return 10;
             case 14:
-                return 11;
+                return 10;
             case 15:
                 return 11;
             case 16:
-                return 12;
+                return 11;
             case 17:
                 return 12;
             case 18:
-                return 13;
-            case 19:
+                return 12;
+            case 29:
                 return 13;
             case 20:
-                return 14;
-            case 21:
-                return 14;
-            case 22:
-                return 15;
-            case 23:
-                return 15;
-            case 24:
-                return 16;
-            case 25:
-                return 16;
-            case 26:
-                return 17;
+                return 13;
             default:
                 return 2;
         }
@@ -117,54 +95,46 @@ public class LevelingSystem
     {
         switch (currentLevel)
         {
-            case 0:
-                return 500;
             case 1:
-                return 480;
+                return 500;
             case 2:
-                return 460;
+                return 480;
             case 3:
-                return 440;
+                return 460;
             case 4:
-                return 420;
+                return 440;
             case 5:
-                return 400;
+                return 420;
             case 6:
-                return 380;
+                return 400;
             case 7:
-                return 360;
+                return 380;
             case 8:
-                return 340;
+                return 360;
             case 9:
-                return 320;
+                return 340;
             case 10:
-                return 300;
+                return 320;
             case 11:
-                return 280;
+                return 300;
             case 12:
-                return 260;
+                return 280;
             case 13:
-                return 240;
+                return 260;
             case 14:
-                return 220;
+                return 240;
             case 15:
-                return 200;
+                return 220;
             case 16:
-                return 180;
+                return 200;
             case 17:
-                return 160;
+                return 180;
             case 18:
-                return 140;
+                return 160;
             case 19:
-                return 120;
+                return 140;
             case 20:
-            case 21:
-            case 22:
-            case 23:
-            case 24:
-            case 25:
-            case 26:
-                return 100;
+                return 120;
             default:
                 return 1000;
         }
@@ -174,45 +144,48 @@ public class LevelingSystem
     {
         switch (currentLevel)
         {
-            case 0:
-                return 150;
             case 1:
-                return 200;
+                return 50;
             case 2:
-                return 200;
+                return 100;
             case 3:
-                return 250;
+                return 150;
             case 4:
-                return 250;
+                return 200;
             case 5:
-                return 300;
+                return 250;
             case 6:
+                return 300;
             case 7:
-            case 8:
-            case 9:
-            case 10:
                 return 350;
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-            case 17:
-            case 18:
-            case 19:
-            case 20:
+            case 8:
                 return 400;
-            case 21:
-            case 22:
-            case 23:
-            case 24:
+            case 9:
+                return 450;
+            case 10:
                 return 500;
-            case 25:
-            case 26:
+            case 11:
+                return 550;
+            case 12:
                 return 600;
-            default:
+            case 13:
+                return 650;
+            case 14:
+                return 700;
+            case 15:
+                return 750;
+            case 16:
+                return 800;
+            case 17:
+                return 850;
+            case 18:
+                return 900;
+            case 19:
+                return 950;
+            case 20:
                 return 1000;
+            default:
+                return 0;
         }
     }
 }

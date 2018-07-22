@@ -61,7 +61,7 @@ public class SettingsActivity extends Activity
         int currentLevel = LevelingSystem.GetCurrentLevel(this);
 
         ArrayList<String> listOfLevels = new ArrayList<>();
-        for (int i = 0; i <= currentLevel; i++)
+        for (int i = 1; i <= currentLevel; i++)
         {
             listOfLevels.add("Level " + i);
         }

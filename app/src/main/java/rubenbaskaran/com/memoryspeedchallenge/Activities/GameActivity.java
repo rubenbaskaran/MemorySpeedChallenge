@@ -333,8 +333,7 @@ public class GameActivity extends Activity
     {
         currentLevel = LevelingSystem.GetCurrentLevel(this);
         currentRank = LevelingSystem.GetCurrentRank(currentLevel);
-        int levelToDisplay = (currentLevel == 26) ? 25 : currentLevel;
-        levelTextView.setText("Level: " + String.valueOf(levelToDisplay) + "/25");
+        levelTextView.setText("Level: " + String.valueOf(currentLevel) + "/20");
     }
 
     private void EnableGridButtons(boolean input)
@@ -446,8 +445,11 @@ public class GameActivity extends Activity
 
     private void IncrementCurrentLevel()
     {
-        SharedPreferences sharedPreferences = getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", MODE_PRIVATE);
-        sharedPreferences.edit().putInt("currentlevel", currentLevel + 1).apply();
+        if (currentLevel < 20)
+        {
+            SharedPreferences sharedPreferences = getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", MODE_PRIVATE);
+            sharedPreferences.edit().putInt("currentlevel", currentLevel + 1).apply();
+        }
     }
 
     private void StartCounter()

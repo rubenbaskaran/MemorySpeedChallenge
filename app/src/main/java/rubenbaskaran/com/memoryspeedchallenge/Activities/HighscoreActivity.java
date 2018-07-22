@@ -30,7 +30,7 @@ public class HighscoreActivity extends Activity
     private int GetHighscoreLevel(Context context)
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", context.MODE_PRIVATE);
-        return sharedPreferences.getInt("highscorelevel", 0);
+        return sharedPreferences.getInt("highscorelevel", 1);
     }
 
     public static boolean SetHighscoreAndHighscoreLevel(int newScore, int highscoreLevel, Context context)
