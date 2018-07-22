@@ -76,27 +76,27 @@ public class LevelingSystem
         switch (currentLevel)
         {
             case 1:
-                return 500;
+                return 550;
             case 2:
-                return 450;
-            case 3:
-                return 400;
-            case 4:
-                return 350;
-            case 5:
-                return 300;
-            case 6:
-                return 250;
-            case 7:
-                return 200;
-            case 8:
-                return 150;
-            case 9:
-                return 100;
-            case 10:
-                return 50;
-            default:
                 return 500;
+            case 3:
+                return 450;
+            case 4:
+                return 400;
+            case 5:
+                return 350;
+            case 6:
+                return 300;
+            case 7:
+                return 250;
+            case 8:
+                return 200;
+            case 9:
+                return 150;
+            case 10:
+                return 100;
+            default:
+                return 550;
         }
     }
 
@@ -105,27 +105,27 @@ public class LevelingSystem
         switch (currentLevel)
         {
             case 1:
-                return 50;
-            case 2:
-                return 100;
-            case 3:
                 return 150;
-            case 4:
+            case 2:
                 return 200;
-            case 5:
+            case 3:
                 return 250;
-            case 6:
+            case 4:
                 return 300;
-            case 7:
+            case 5:
                 return 350;
-            case 8:
+            case 6:
                 return 400;
-            case 9:
+            case 7:
                 return 450;
-            case 10:
+            case 8:
                 return 500;
+            case 9:
+                return 550;
+            case 10:
+                return 600;
             default:
-                return 50;
+                return 150;
         }
     }
 }
