@@ -93,7 +93,6 @@ public class LevelingSystem
             case 8:
                 return 150;
             case 9:
-                return 100;
             case 10:
             case 11:
                 return 100;
