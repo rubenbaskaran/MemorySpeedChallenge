@@ -98,10 +98,25 @@ public class GameActivity extends Activity
             {
                 HighscoreActivity.SetHighscoreAndHighscoreLevel(score, currentLevel, this);
                 IncrementCurrentLevel();
-                String dialogMessage = ((currentLevel == 10) || (currentLevel == 11)) ?
-                        "Congratulations! \nYou've completed the whole game \nTry breaking the world record in 60 seconds" :
-                        "Congratulations! \nLevel " + currentLevel + " completed";
-                String positiveButtonText = ((currentLevel == 10) || (currentLevel == 11)) ? "Play again" : "Next level";
+                String dialogMessage;
+                String positiveButtonText;
+
+                if (currentLevel == 10)
+                {
+                    dialogMessage = "Congratulations! \nYou've completed the whole game \nTry breaking the world record in 60 seconds";
+                    positiveButtonText = "Play bonus level";
+                }
+                else if (currentLevel == 11)
+                {
+                    dialogMessage = "You scored " + score + " Points";
+                    positiveButtonText = "Play again";
+                }
+                else
+                {
+                    dialogMessage = "Congratulations! \nLevel " + currentLevel + " Completed";
+                    positiveButtonText = "Next level";
+                }
+
                 ShowDialog(dialogMessage, positiveButtonText);
             }
             else

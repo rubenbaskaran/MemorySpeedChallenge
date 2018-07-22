@@ -18,7 +18,7 @@ public class HighscoreActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
         highscoreTextView = findViewById(R.id.highscoreTextView);
-        highscoreTextView.setText("Your highscore: " + String.valueOf(GetHighscore(this)) + " (level " + String.valueOf(GetHighscoreLevel(this)) + ")");
+        highscoreTextView.setText("Your highscore: " + String.valueOf(GetHighscore(this)) + " (level " + GetHighscoreLevel(this) + ")");
     }
 
     private int GetHighscore(Context context)
@@ -27,10 +27,10 @@ public class HighscoreActivity extends Activity
         return sharedPreferences.getInt("highscore", 0);
     }
 
-    private int GetHighscoreLevel(Context context)
+    private String GetHighscoreLevel(Context context)
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", context.MODE_PRIVATE);
-        return sharedPreferences.getInt("highscorelevel", 1);
+        return sharedPreferences.getString("highscorelevel", "1");
     }
 
     public static boolean SetHighscoreAndHighscoreLevel(int newScore, int highscoreLevel, Context context)
@@ -41,7 +41,7 @@ public class HighscoreActivity extends Activity
         if (newScore > oldScore)
         {
             sharedPreferences.edit().putInt("highscore", newScore).apply();
-            sharedPreferences.edit().putInt("highscorelevel", highscoreLevel).apply();
+            sharedPreferences.edit().putString("highscorelevel", highscoreLevel == 11 ? "bonus level" : String.valueOf(highscoreLevel)).apply();
             return true;
         }
 
