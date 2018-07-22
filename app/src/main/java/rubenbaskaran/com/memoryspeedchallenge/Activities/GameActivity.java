@@ -45,12 +45,14 @@ public class GameActivity extends Activity
         EnableGridButtons(false);
 
         scoreTextView = findViewById(R.id.scoreTextView);
-        counterTextView = findViewById(R.id.counterTextView);
-        counterTextView.setText(String.valueOf(gameLength) + " sec");
         levelTextView = findViewById(R.id.levelTextView);
 
         SetLevelAndRank();
         SetScore();
+
+        counterTextView = findViewById(R.id.counterTextView);
+        String gameLengthToShow = currentLevel == 11 ? "60 sec" : String.valueOf(gameLength) + " sec";
+        counterTextView.setText(gameLengthToShow);
     }
     //endregion
 
@@ -96,7 +98,9 @@ public class GameActivity extends Activity
             {
                 HighscoreActivity.SetHighscoreAndHighscoreLevel(score, currentLevel, this);
                 IncrementCurrentLevel();
-                String dialogMessage = ((currentLevel == 10) || (currentLevel == 11)) ? "Congratulations! \nYou've completed the whole game" : "Congratulations! \nLevel " + currentLevel + " completed";
+                String dialogMessage = ((currentLevel == 10) || (currentLevel == 11)) ?
+                        "Congratulations! \nYou've completed the whole game \nTry breaking the world record in 60 seconds" :
+                        "Congratulations! \nLevel " + currentLevel + " completed";
                 String positiveButtonText = ((currentLevel == 10) || (currentLevel == 11)) ? "Play again" : "Next level";
                 ShowDialog(dialogMessage, positiveButtonText);
             }
@@ -154,7 +158,7 @@ public class GameActivity extends Activity
         {
             super.onPreExecute();
             StopAllThreads = false;
-            counter = gameLength;
+            counter = currentLevel == 11 ? 60 : gameLength;
         }
 
         @Override
