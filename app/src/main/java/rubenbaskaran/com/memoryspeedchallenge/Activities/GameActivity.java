@@ -96,7 +96,7 @@ public class GameActivity extends Activity
             {
                 HighscoreActivity.SetHighscoreAndHighscoreLevel(score, currentLevel, this);
                 IncrementCurrentLevel();
-                String dialogMessage = ((currentLevel == 10) || (currentLevel == 11)) ? "Congratulations! \nYou've completed the whole game!" : "Congratulations! \nLevel " + currentLevel + " completed!";
+                String dialogMessage = ((currentLevel == 10) || (currentLevel == 11)) ? "Congratulations! \nYou've completed the whole game" : "Congratulations! \nLevel " + currentLevel + " completed";
                 String positiveButtonText = ((currentLevel == 10) || (currentLevel == 11)) ? "Play again" : "Next level";
                 ShowDialog(dialogMessage, positiveButtonText);
             }
