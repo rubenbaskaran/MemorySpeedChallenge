@@ -445,7 +445,7 @@ public class GameActivity extends Activity
 
     private void IncrementCurrentLevel()
     {
-        if (currentLevel < 20)
+        if (currentLevel < 10)
         {
             SharedPreferences sharedPreferences = getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", MODE_PRIVATE);
             sharedPreferences.edit().putInt("currentlevel", currentLevel + 1).apply();
