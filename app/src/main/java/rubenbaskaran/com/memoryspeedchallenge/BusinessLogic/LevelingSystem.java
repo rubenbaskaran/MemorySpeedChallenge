@@ -28,11 +28,11 @@ public class LevelingSystem
         {
             return "Experienced";
         }
-        else if (currentLevel > 6 && currentLevel < 10)
+        else if (currentLevel > 6 && currentLevel < 11)
         {
             return "Highly intelligent";
         }
-        else if (currentLevel > 9 && currentLevel < 11)
+        else if (currentLevel == 11)
         {
             return "Genius";
         }
@@ -65,6 +65,7 @@ public class LevelingSystem
             case 9:
                 return 12;
             case 10:
+            case 11:
                 return 13;
             default:
                 return 4;
@@ -94,6 +95,7 @@ public class LevelingSystem
             case 9:
                 return 100;
             case 10:
+            case 11:
                 return 100;
             default:
                 return 500;
@@ -123,6 +125,7 @@ public class LevelingSystem
             case 9:
                 return 550;
             case 10:
+            case 11:
                 return 600;
             default:
                 return 150;

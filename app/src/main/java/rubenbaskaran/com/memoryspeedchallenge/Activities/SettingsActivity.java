@@ -59,9 +59,10 @@ public class SettingsActivity extends Activity
     private void SetupSpinner()
     {
         int currentLevel = LevelingSystem.GetCurrentLevel(this);
+        int numberOfSpinnerItems = currentLevel == 11 ? 10 : currentLevel;
 
         ArrayList<String> listOfLevels = new ArrayList<>();
-        for (int i = 1; i <= currentLevel; i++)
+        for (int i = 1; i <= numberOfSpinnerItems; i++)
         {
             listOfLevels.add("Level " + i);
         }

@@ -43,7 +43,8 @@ public class HomeActivity extends Activity
         currentLevel = LevelingSystem.GetCurrentLevel(this);
         currentRank = LevelingSystem.GetCurrentRank(currentLevel);
 
-        currentLevelTextView.setText("Level: " + String.valueOf(currentLevel) + "/10");
+        String outputMessage = currentLevel == 11 ? "Level: 10/10 [Completed]" : "Level: " + String.valueOf(currentLevel) + "/10";
+        currentLevelTextView.setText(outputMessage);
         currentRankTextView.setText("Rank: " + currentRank);
     }
 
