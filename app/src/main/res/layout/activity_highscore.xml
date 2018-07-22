@@ -9,6 +9,7 @@
     tools:context=".Activities.HighscoreActivity">
 
     <TextView
+        android:id="@+id/highscoreTextView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

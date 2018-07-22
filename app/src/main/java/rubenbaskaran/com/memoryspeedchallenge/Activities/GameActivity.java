@@ -94,6 +94,7 @@ public class GameActivity extends Activity
         {
             if (score >= LevelingSystem.GetMinimumScore(currentLevel))
             {
+                HighscoreActivity.SetHighscoreAndHighscoreLevel(score, currentLevel, this);
                 IncrementCurrentLevel();
                 ShowDialog("Congratulations! Level completed!", "Next level");
             }
