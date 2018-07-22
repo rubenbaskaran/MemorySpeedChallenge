@@ -60,13 +60,13 @@ public class SettingsActivity extends Activity
     {
         int currentLevel = LevelingSystem.GetCurrentLevel(this);
 
-        ArrayList<Integer> listOfLevels = new ArrayList<>();
+        ArrayList<String> listOfLevels = new ArrayList<>();
         for (int i = 0; i <= currentLevel; i++)
         {
-            listOfLevels.add(i);
+            listOfLevels.add("Level " + i);
         }
 
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listOfLevels);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listOfLevels);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         levelSpinner.setAdapter(adapter);
         levelSpinner.setSelection(listOfLevels.size() - 1);

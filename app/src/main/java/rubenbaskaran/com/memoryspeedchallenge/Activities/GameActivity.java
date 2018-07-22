@@ -67,8 +67,8 @@ public class GameActivity extends Activity
             view.setEnabled(false);
             if (route.isEmpty())
             {
-                ShowRightAnswerIcon(true);
                 EnableGridButtons(false);
+                ShowRightAnswerIcon(true);
                 startGameBtn.setEnabled(true);
                 score += 10 * generatedRouteLength;
                 scoreTextView.setText("Points: " + String.valueOf(score) + "/" + LevelingSystem.GetMinimumScore(currentLevel));
@@ -77,8 +77,8 @@ public class GameActivity extends Activity
         }
         else
         {
-            ShowRightAnswerIcon(false);
             EnableGridButtons(false);
+            ShowRightAnswerIcon(false);
             startGameBtn.setEnabled(true);
             StartNewRoundOrShowResults();
         }
@@ -190,6 +190,7 @@ public class GameActivity extends Activity
             {
                 StopAllThreads = true;
                 ResetGridButtonsColor();
+                EnableGridButtons(false);
                 StartNewRoundOrShowResults();
             }
         }

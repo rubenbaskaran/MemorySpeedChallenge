@@ -52,29 +52,64 @@ public class LevelingSystem
 
     public static int GetRouteLength(int currentLevel)
     {
-        if (currentLevel >= 0 && currentLevel < 6)
+        switch (currentLevel)
         {
-            return 6;
-        }
-        else if (currentLevel > 5 && currentLevel < 11)
-        {
-            return 7;
-        }
-        else if (currentLevel > 10 && currentLevel < 16)
-        {
-            return 8;
-        }
-        else if (currentLevel > 15 && currentLevel < 21)
-        {
-            return 9;
-        }
-        else if (currentLevel > 20 && currentLevel < 25)
-        {
-            return 10;
-        }
-        else
-        {
-            return 11;
+            case 0:
+                return 4;
+            case 1:
+                return 4;
+            case 2:
+                return 5;
+            case 3:
+                return 5;
+            case 4:
+                return 6;
+            case 5:
+                return 6;
+            case 6:
+                return 7;
+            case 7:
+                return 7;
+            case 8:
+                return 8;
+            case 9:
+                return 8;
+            case 10:
+                return 9;
+            case 11:
+                return 9;
+            case 12:
+                return 10;
+            case 13:
+                return 10;
+            case 14:
+                return 11;
+            case 15:
+                return 11;
+            case 16:
+                return 12;
+            case 17:
+                return 12;
+            case 18:
+                return 13;
+            case 19:
+                return 13;
+            case 20:
+                return 14;
+            case 21:
+                return 14;
+            case 22:
+                return 15;
+            case 23:
+                return 15;
+            case 24:
+                return 16;
+            case 25:
+                return 16;
+            case 26:
+                return 17;
+            default:
+                return 2;
         }
     }
 
@@ -140,24 +175,28 @@ public class LevelingSystem
         switch (currentLevel)
         {
             case 0:
+                return 150;
             case 1:
+                return 200;
             case 2:
+                return 200;
             case 3:
+                return 250;
             case 4:
+                return 250;
             case 5:
-                return 100;
+                return 300;
             case 6:
             case 7:
             case 8:
             case 9:
             case 10:
-                return 200;
+                return 350;
             case 11:
             case 12:
             case 13:
             case 14:
             case 15:
-                return 300;
             case 16:
             case 17:
             case 18:
