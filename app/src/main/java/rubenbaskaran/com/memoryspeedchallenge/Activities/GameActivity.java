@@ -73,7 +73,8 @@ public class GameActivity extends Activity
                 ShowRightAnswerIcon(true);
                 startGameBtn.setEnabled(true);
                 score += 10 * generatedRouteLength;
-                scoreTextView.setText("Points: " + String.valueOf(score) + "/" + LevelingSystem.GetMinimumScore(currentLevel));
+                String outputMessage = currentLevel == 11 ? "Points: " + String.valueOf(score) : "Points: " + String.valueOf(score) + "/" + LevelingSystem.GetMinimumScore(currentLevel);
+                scoreTextView.setText(outputMessage);
                 StartNewRoundOrShowResults();
             }
         }

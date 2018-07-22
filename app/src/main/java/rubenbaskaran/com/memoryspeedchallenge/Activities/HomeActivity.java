@@ -46,7 +46,7 @@ public class HomeActivity extends Activity
 
         if (currentLevel == 11)
         {
-            outputMessage = "Level: Bonus Level";
+            outputMessage = "Level: bonus level";
         }
         else if (currentLevel == 10)
         {
