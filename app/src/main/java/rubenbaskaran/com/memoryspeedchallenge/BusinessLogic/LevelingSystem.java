@@ -76,27 +76,27 @@ public class LevelingSystem
         switch (currentLevel)
         {
             case 1:
-                return 550;
-            case 2:
                 return 500;
-            case 3:
+            case 2:
                 return 450;
-            case 4:
+            case 3:
                 return 400;
-            case 5:
+            case 4:
                 return 350;
-            case 6:
+            case 5:
                 return 300;
-            case 7:
+            case 6:
                 return 250;
-            case 8:
+            case 7:
                 return 200;
-            case 9:
+            case 8:
                 return 150;
+            case 9:
+                return 100;
             case 10:
                 return 100;
             default:
-                return 550;
+                return 500;
         }
     }
 
