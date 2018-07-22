@@ -12,18 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:weightSum="6"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="6">
 
         <Switch
             android:id="@+id/soundSwitch"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:textOff="Off"
             android:checked="true"
             android:showText="true"
-            android:text="Sound"/>
+            android:text="Sound"
+            android:textOff="Off"/>
     </LinearLayout>
 
     <LinearLayout
@@ -31,6 +31,23 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose level"
+            android:textColor="@android:color/black"/>
+
+        <Space
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:id="@+id/levelSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </Spinner>
     </LinearLayout>
 
     <LinearLayout

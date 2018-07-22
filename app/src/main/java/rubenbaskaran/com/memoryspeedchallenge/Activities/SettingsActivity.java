@@ -3,14 +3,23 @@ package rubenbaskaran.com.memoryspeedchallenge.Activities;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.Spinner;
 import android.widget.Switch;
 
+import java.util.ArrayList;
+
+import rubenbaskaran.com.memoryspeedchallenge.BusinessLogic.LevelingSystem;
 import rubenbaskaran.com.memoryspeedchallenge.R;
 
 public class SettingsActivity extends Activity
 {
     Switch soundSwitch;
+    Spinner levelSpinner;
+    private boolean spinnerAutoCalled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -20,8 +29,50 @@ public class SettingsActivity extends Activity
         soundSwitch = findViewById(R.id.soundSwitch);
         SetSoundSwitchValue();
         soundSwitch.setOnCheckedChangeListener(onCheckedChangeListener);
+        levelSpinner = findViewById(R.id.levelSpinner);
+        SetupSpinner();
+        levelSpinner.setOnItemSelectedListener(SpinnerOnClick);
     }
 
+    AdapterView.OnItemSelectedListener SpinnerOnClick = new AdapterView.OnItemSelectedListener()
+    {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+        {
+            if (spinnerAutoCalled)
+            {
+                SharedPreferences sharedPreferences = getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", MODE_PRIVATE);
+                sharedPreferences.edit().putInt("currentlevel", position).apply();
+            }
+            else
+            {
+                spinnerAutoCalled = true;
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent)
+        {
+        }
+    };
+
+    private void SetupSpinner()
+    {
+        int currentLevel = LevelingSystem.GetCurrentLevel(this);
+
+        ArrayList<Integer> listOfLevels = new ArrayList<>();
+        for (int i = 0; i <= currentLevel; i++)
+        {
+            listOfLevels.add(i);
+        }
+
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listOfLevels);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        levelSpinner.setAdapter(adapter);
+        levelSpinner.setSelection(listOfLevels.size() - 1);
+    }
+
+    //region Sound Settings
     CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener()
     {
         @Override
@@ -38,4 +89,5 @@ public class SettingsActivity extends Activity
         Boolean soundOn = sharedPreferences.getBoolean("sound", true);
         soundSwitch.setChecked(soundOn);
     }
+    //endregion
 }
