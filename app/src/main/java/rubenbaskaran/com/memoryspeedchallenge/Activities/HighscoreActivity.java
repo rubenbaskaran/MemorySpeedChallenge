@@ -18,7 +18,9 @@ public class HighscoreActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
         highscoreTextView = findViewById(R.id.highscoreTextView);
-        highscoreTextView.setText("Your highscore: " + String.valueOf(GetHighscore(this)) + " (level " + GetHighscoreLevel(this) + ")");
+        String highscoreLevel = GetHighscoreLevel(this);
+        String outputMessage = highscoreLevel.equals("bonus level") ? " (bonus level)" : " (level: " + highscoreLevel + ")";
+        highscoreTextView.setText("Your highscore: " + String.valueOf(GetHighscore(this)) + outputMessage);
     }
 
     private int GetHighscore(Context context)
