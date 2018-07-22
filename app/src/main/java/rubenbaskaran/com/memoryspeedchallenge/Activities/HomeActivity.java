@@ -41,10 +41,9 @@ public class HomeActivity extends Activity
     private void SetLevelAndRank()
     {
         currentLevel = LevelingSystem.GetCurrentLevel(this);
-        int levelToDisplay = (currentLevel == 26) ? 25 : currentLevel;
         currentRank = LevelingSystem.GetCurrentRank(currentLevel);
 
-        currentLevelTextView.setText("Level: " + String.valueOf(levelToDisplay) + "/25");
+        currentLevelTextView.setText("Level: " + String.valueOf(currentLevel) + "/10");
         currentRankTextView.setText("Rank: " + currentRank);
     }
 

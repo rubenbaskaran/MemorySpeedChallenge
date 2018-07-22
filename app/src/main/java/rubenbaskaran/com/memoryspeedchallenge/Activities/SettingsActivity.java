@@ -42,7 +42,7 @@ public class SettingsActivity extends Activity
             if (spinnerAutoCalled)
             {
                 SharedPreferences sharedPreferences = getSharedPreferences("rubenbaskaran.com.memoryspeedchallenge", MODE_PRIVATE);
-                sharedPreferences.edit().putInt("currentlevel", position).apply();
+                sharedPreferences.edit().putInt("currentlevel", position + 1).apply();
             }
             else
             {
