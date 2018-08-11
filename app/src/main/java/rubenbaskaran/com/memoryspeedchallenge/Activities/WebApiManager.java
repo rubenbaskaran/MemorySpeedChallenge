@@ -3,6 +3,9 @@ package rubenbaskaran.com.memoryspeedchallenge.Activities;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -10,6 +13,20 @@ import java.net.URL;
 
 class WebApiManager
 {
+    static void GetAllHighscores()
+    {
+        WebApiManager.GetAllHighscoresAsync getAllHighscoresAsync = new WebApiManager.GetAllHighscoresAsync();
+        try
+        {
+            String allHighscores = getAllHighscoresAsync.execute().get();
+            PrintReceivedMessages(allHighscores);
+        }
+        catch (Exception e)
+        {
+            Log.e("Error", "Couldn't get all highscores. Error message: " + e);
+        }
+    }
+
     static class GetAllHighscoresAsync extends AsyncTask<Void, Void, String>
     {
         @Override
@@ -65,12 +82,39 @@ class WebApiManager
         }
     }
 
+    static void SaveNewHighscore(String username, int score)
+    {
+        WebApiManager.SaveNewHighscoreAsync getAllHighscoresAsync = new WebApiManager.SaveNewHighscoreAsync();
+        getAllHighscoresAsync.execute();
+    }
+
     static class SaveNewHighscoreAsync extends AsyncTask<Void, Void, Void>
     {
         @Override
         protected Void doInBackground(Void... voids)
         {
             return null;
+        }
+    }
+
+    static void PrintReceivedMessages(String receivedMessages)
+    {
+        try
+        {
+            JSONObject json = new JSONObject(receivedMessages);
+            JSONArray info = json.getJSONArray("highscores");
+
+            for (int i = 0; i < info.length(); i++)
+            {
+                JSONObject jsonObject = info.getJSONObject(i);
+                String username = jsonObject.getString("username");
+                String score = jsonObject.getString("score");
+                Log.e("Highscore", "Username: " + username + ". Score: " + score);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.e("Error", "Couldn't convert string to json. Error message: " + e);
         }
     }
 }

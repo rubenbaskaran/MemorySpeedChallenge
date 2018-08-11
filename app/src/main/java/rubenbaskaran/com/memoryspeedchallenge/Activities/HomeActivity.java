@@ -3,15 +3,14 @@ package rubenbaskaran.com.memoryspeedchallenge.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import rubenbaskaran.com.memoryspeedchallenge.BusinessLogic.LevelingSystem;
 import rubenbaskaran.com.memoryspeedchallenge.R;
+
+import static rubenbaskaran.com.memoryspeedchallenge.Activities.WebApiManager.GetAllHighscores;
+import static rubenbaskaran.com.memoryspeedchallenge.Activities.WebApiManager.SaveNewHighscore;
 
 public class HomeActivity extends Activity
 {
@@ -29,50 +28,7 @@ public class HomeActivity extends Activity
         SetLevelAndRank();
 
         GetAllHighscores();
-        SaveNewHighscore();
-    }
-
-    private void GetAllHighscores()
-    {
-        WebApiManager.GetAllHighscoresAsync getAllHighscoresAsync = new WebApiManager.GetAllHighscoresAsync();
-
-        try
-        {
-            String allHighscores = getAllHighscoresAsync.execute().get();
-            PrintReceivedMessages(allHighscores);
-        }
-        catch (Exception e)
-        {
-            Log.e("Error", "Couldn't get all highscores. Error message: " + e);
-        }
-
-    }
-
-    private void PrintReceivedMessages(String receivedMessages)
-    {
-        try
-        {
-            JSONObject json = new JSONObject(receivedMessages);
-            JSONArray info = json.getJSONArray("highscores");
-
-            for (int i = 0; i < info.length(); i++)
-            {
-                JSONObject jsonObject = info.getJSONObject(i);
-                String username = jsonObject.getString("username");
-                String score = jsonObject.getString("score");
-                Log.e("Highscore", "Username: " + username + ". Score: " + score);
-            }
-        }
-        catch (Exception e)
-        {
-            Log.e("Error", "Couldn't convert string to json. Error message: " + e);
-        }
-    }
-
-    private void SaveNewHighscore()
-    {
-        WebApiManager.SaveNewHighscoreAsync getAllHighscoresAsync = new WebApiManager.SaveNewHighscoreAsync();
-        getAllHighscoresAsync.execute();
+        SaveNewHighscore("testfromandroid", 201);
     }
 
     public void OpenGameActivity(View view)
