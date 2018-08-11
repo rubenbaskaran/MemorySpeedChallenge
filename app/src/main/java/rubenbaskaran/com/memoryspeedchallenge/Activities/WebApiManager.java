@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 class WebApiManager
 {
@@ -85,14 +87,19 @@ class WebApiManager
     static void SaveNewHighscore(String username, int score)
     {
         WebApiManager.SaveNewHighscoreAsync getAllHighscoresAsync = new WebApiManager.SaveNewHighscoreAsync();
-        getAllHighscoresAsync.execute();
+        List<Object> input = new ArrayList<>();
+        input.add(username);
+        input.add(score);
+        getAllHighscoresAsync.execute(input);
     }
 
-    static class SaveNewHighscoreAsync extends AsyncTask<Void, Void, Void>
+    static class SaveNewHighscoreAsync extends AsyncTask<List<Object>, Void, String>
     {
         @Override
-        protected Void doInBackground(Void... voids)
+        protected String doInBackground(List<Object>... input)
         {
+            // TODO: Tjek kode i SendMessage metoden på GitHub
+
             return null;
         }
     }
